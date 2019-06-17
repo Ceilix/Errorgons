@@ -84,3 +84,4 @@ app = webapp2.WSGIApplication([
      ('/library', HappyLibrary),
      ('/nouser', NoUserHandler)
 ], debug=True)
+# random.choice() use this to do the randomizer tomorrow
