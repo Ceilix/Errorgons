@@ -1,0 +1,47 @@
+.span {
+  border-radius: 20px;
+  background-color: grey;
+  padding: 20px;
+  align: center;
+}
+.Family {
+  border-radius: 20px;
+  background-color: #ffb366;
+  padding: 15px;
+  width: 150px;
+  height: 130px;
+  display: inline-block;
+  border: 1px solid #bdbdbd;
+}
+.Work {
+  border-radius: 20px;
+  background-color: #ffa64d;
+  padding: 15px;
+  width: 150px;
+  height: 130px;
+  display: inline-block;
+  border: 1px solid #bdbdbd;
+}
+.Friends {
+  border-radius: 20px;
+  background-color: #ff9933;
+  padding: 15px;
+  width: 150px;
+  height: 130px;
+  display: inline-block;
+  border: 1px solid #bdbdbd;
+}
+#categories{
+    width:100%;
+    margin: 0 auto;
+    margin-top:75px;
+    height:250px;
+    border:10px solid black;
+}
+img {
+  width: 130px;
+  height: 80px;
+}
+body {
+  background-color: #ff8080;
+}
