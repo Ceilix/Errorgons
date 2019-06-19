@@ -53,11 +53,9 @@ class MainHandler(webapp2.RequestHandler):
             )
 
             Userinit.put()
-            # self.response.write("To be or not to be")
             self.redirect("/HappyInterface")
 
           else:
-        #     self.response.write("You are not logged in")
             self.redirect("/nouser")
 
 class MainPage(webapp2.RequestHandler):
@@ -69,6 +67,15 @@ class MainPage(webapp2.RequestHandler):
          Icons = {
           }
          self.response.write(start_template.render(Icons))
+
+class HappySurvey(webapp2.RequestHandler):
+    def get(self):
+        start_template = jinja_current_dir.get_template("templates/survey.html")
+        self.response.write(start_template.render())
+    def post(self):
+        start_template = jinja_current_dir.get_template("templates/survey.html")
+        self.response.write(start_template.render())    
+
 
 class HappyInput(webapp2.RequestHandler):
       def post(self):
@@ -172,10 +179,11 @@ class HappyLibrary(webapp2.RequestHandler):
 class NoUserHandler(webapp2.RequestHandler):
       def get(self):
           login_url = users.create_login_url("/")
-          self.response.write("Please log in. <a href="+ login_url + ">Login There</a>")
+          self.response.write("Please log in. <a href="+ login_url + ">Login Here</a>")
 
 app = webapp2.WSGIApplication([
      ('/',MainHandler),
+     ('/DataInput',HappySurvey),
      ('/HappyInterface',MainPage),
      ('/Happy', HappyInput),
      ('/Happy2', HappyInputClone),
