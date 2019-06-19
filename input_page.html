@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset= "UTF-8">
+  <title>Input</title>
+ </head>
+  <body>
+    <h1> What made you happy today? Happy thoughts can be big or small, the extra smile you got from a stranger or even getting the job of your dream! <h1>
+    <br>
+     <form method= "post" action= "/Happy">
+
+     <div class ="Input1">
+      <input type = "text" name = "Happy_thought1" id = "happy_input1"></div>
+      <button name="forwardBtn" onclick="Happy_goals()" </button>
+      <input type="submit" value="Yay!" action = "Happy_goals()">
+      <input type="submit" value="Lets go!">
+
+      </form>
+
+
+
+
+        <h2>{{Happy_goals}}</h2>
+       <!-- <input type = "text" name = "Happy_thought2" id = "happy_input2"></div>
+       <div class ="Input3">
+         <h2> Insert the third thing that made you happy today! </h2>
+        <input type = "text" name = "Happy_thought3" id = "happy_input3"></div> -->
+        <h4>{{Daily_Happiness_Counter}}<h4>
+        <h2>{{Wellness_Messages}}</h2>
+  </body>
+</html>
