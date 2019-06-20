@@ -83,6 +83,27 @@ class HappySurvey(webapp2.RequestHandler):
 class HappyInput(webapp2.RequestHandler):
       def post(self):
           #Placeholder location for survey classifcation input
+          username = str(users.get_current_user())
+          Agegrp = self.request.get('Age-group')
+          Regiongrp = self.request.get('Region')
+          print("Regiongrp", Regiongrp)
+          Surveyresult = HappyCloud.Happy(
+                      User = username,
+                      UserAge = Agegrp,
+                      UserRegion = Regiongrp
+                )
+          Surveyresult.put()
+          print(self.request)
+        #  print(Surveyresult)
+          print("Hi we are here")
+
+
+
+
+          #1. Retrieve surveyresults
+          #2. Put surveyresults w user
+          #2. Fetch Surveyresults when inputting new data
+          #3. Input Surveyresults w Happyinput
 
 
           user = Usertemp.query(Usertemp.Userkey == str(users.get_current_user())).fetch()
@@ -101,8 +122,11 @@ class HappyInput(webapp2.RequestHandler):
              unlockbutton = "hidden"
 
 
-
+          #print(Happy.query(Happy.User == str(users.get_current_user())).fetch())
           print('OK')
+          #Happy.query returns nothing
+          #Possibility 1 : Usersurvey not put() properly
+          #Possibility 2 : THe query is looking for the wrong thing
           template_vars = {
                   'status': unlockbutton,
                   'Wellness_Messages' : get_message(),
@@ -116,18 +140,25 @@ class HappyInput(webapp2.RequestHandler):
 class HappyInputClone(webapp2.RequestHandler):
      def post(self):
          user = Usertemp.query(Usertemp.Userkey == str(users.get_current_user())).fetch()
+         # UserSurveyall = Happy.query()
+         Usersurvey = Happy.query(Happy.User == str(users.get_current_user())).fetch()
+         Userinfo = Usersurvey[0]
          usercurrent = user[0]
          Happythought1 = self.request.get('Happy_thought1')
          username = str(users.get_current_user())
+         Userager = Userinfo.UserAge
+         Userregioner = Userinfo.UserRegion
          if Happythought1 != "":
-             Happy = HappyCloud.Happy(
+             Renamed = HappyCloud.Happy(
                     User = username,
                    # Identity = surveyresults
-                    input1 =  Happythought1
+                    input1 =  Happythought1,
+                    UserAge = Userager,
+                    UserRegion = Userregioner
               )
              usercurrent.Counter += 1
              usercurrent.put()
-             Happy.put()
+             Renamed.put()
 
          unlockbutton = ""
 
@@ -168,7 +199,6 @@ class HappyRetreive(webapp2.RequestHandler):
 
 
 
-
           usercurrent = user[0]
           usercurrent.Counter = 0
           usercurrent.put()
@@ -182,11 +212,12 @@ class HappyRetreive(webapp2.RequestHandler):
           self.response.write(start_template.render(template_vars))
 
 class HappyLibrary(webapp2.RequestHandler):
+
     def get(self):
         results_template = jinja_current_dir.get_template('templates/library.html')
 
         Userperm = Happy.query(Happy.User == str(users.get_current_user())).fetch()
-
+        print("Hello")
         def Number():
             noomber = random.randint(0,len(Userperm)-1)
             return noomber
@@ -209,6 +240,39 @@ class HappyLibrary(webapp2.RequestHandler):
                }
 
         self.response.write(results_template.render(template_vars))
+
+
+    def post(self):
+        results_template = jinja_current_dir.get_template('templates/library.html')
+
+        Userperm = Happy.query(Happy.User == str(users.get_current_user())).fetch()
+        print(Hello)
+        def Number():
+            noomber = random.randint(0,len(Userperm)-1)
+            return noomber
+
+
+        Happythought1 = self.request.get('Happy_thought1')
+        unlockbutton = ""
+        Usernewer = Userperm[Number()]
+        new22 = str(Usernewer.input1)
+        checker = Usernewer
+
+        #Ensure input is not = ""
+        #OR if input is "" refresh new22  until input retrieved not ""
+
+
+
+
+        template_vars = {
+               'happy' : new22,
+               'check' : checker
+               }
+
+        self.response.write(results_template.render(template_vars))
+
+
+
 
 class NoUserHandler(webapp2.RequestHandler):
       def get(self):
