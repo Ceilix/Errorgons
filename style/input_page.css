@@ -1,0 +1,31 @@
+html {
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 400;
+}
+
+.hello {
+    padding-left: 300px;
+    padding-right: 300px;
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    opacity: 1.0;
+    z-index: 1.0;
+  }
+
+  input {
+    border-radius: 30%;
+    background-color: white;
+    height: 50px;
+    width: fit-content;
+    z-index: 1.0;
+  }
+
+  input:hover {
+    background-color: grey;
+  }
+
+body {
+  background-image: url('../images/backgroundimage.png');
+  opacity: 0.8;
+}
