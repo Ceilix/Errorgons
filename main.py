@@ -36,26 +36,36 @@ def get_goals():
 class MainHandler(webapp2.RequestHandler):
       def get(self):
           user = users.get_current_user()
-          if user:
+          userchecker = Usertemp.query(Usertemp.Userkey == str(users.get_current_user())).fetch()
 
 
-            Userinit = Usertemp(
+          if len(userchecker)== 0:
+
+
+           Userinit = Usertemp(
                  Userkey = str(users.get_current_user()),
                  Counter = 0,
-                 Score = 0
+                 
+
                  # Surveycomplete = 0
  #How to prevent this from resetting all the time?
 
 
             )
+           Userinit.put()
 
-            Userinit.put()
-            # self.response.write("To be or not to be")
-            self.redirect("/HappyInterface")
+
+           self.redirect("/DataInput")
 
           else:
+              if user:
+            # self.response.write("To be or not to be")
+
+                self.redirect("/HappyInterface")
+
+              else:
         #     self.response.write("You are not logged in")
-            self.redirect("/nouser")
+                self.redirect("/nouser")
 
 class MainPage(webapp2.RequestHandler):
       def get(self):
@@ -80,11 +90,7 @@ class HappyInput(webapp2.RequestHandler):
       def post(self):
           #Placeholder location for survey classifcation input
           username = str(users.get_current_user())
-<<<<<<< HEAD
-          Agegrp = self.request.get('Age-group')
-=======
           Agegrp = self.request.get('Age-Group')
->>>>>>> db8dcf4cf9ea0440fae49b908183e3875515b913
           Regiongrp = self.request.get('Region')
           print("Regiongrp", Regiongrp)
           Surveyresult = HappyCloud.Happy(
@@ -152,20 +158,12 @@ class HappyInputClone(webapp2.RequestHandler):
              Renamed = HappyCloud.Happy(
                     User = username,
                    # Identity = surveyresults
-<<<<<<< HEAD
-                    input1 =  Happythought1,
-=======
                     input1 = Happythought1,
->>>>>>> db8dcf4cf9ea0440fae49b908183e3875515b913
                     UserAge = Userager,
                     UserRegion = Userregioner
               )
              usercurrent.Counter += 1
-<<<<<<< HEAD
-             #usercurrent.Score += 1
-=======
-             usercurrent.Score += 1
->>>>>>> db8dcf4cf9ea0440fae49b908183e3875515b913
+
              usercurrent.put()
              Renamed.put()
 
@@ -238,6 +236,16 @@ class HappyLibrary(webapp2.RequestHandler):
         Usernewer1 = Userperm[Number()]
         Usernewer2 = Userperm[Number()]
         Usernewer3 = Userperm[Number()]
+
+        while str(Usernewer1.input1) == "None":
+              Usernewer1 = Userperm[Number()]
+
+        while str(Usernewer2.input1) == "None":
+              Usernewer2 = Userperm[Number()]
+
+        while str(Usernewer3.input1) == "None":
+              Usernewer3 = Userperm[Number()]
+
 
         new22 = str(Usernewer1.input1)
         new33 = str(Usernewer2.input1)

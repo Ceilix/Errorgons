@@ -1,3 +1,4 @@
+
 from google.appengine.ext import ndb
 
 class Happy(ndb.Model):
@@ -9,5 +10,4 @@ class Happy(ndb.Model):
 
 class Usertemp(ndb.Model):
     Userkey = ndb.StringProperty(required=True)
-    Score = ndb.IntegerProperty(required = False)
     Counter = ndb.IntegerProperty(required = False)
