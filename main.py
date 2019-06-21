@@ -153,7 +153,7 @@ class HappyInputClone(webapp2.RequestHandler):
                     UserRegion = Userregioner
               )
              usercurrent.Counter += 1
-             usercurrent.Score += 1
+             #usercurrent.Score += 1
              usercurrent.put()
              Renamed.put()
 
