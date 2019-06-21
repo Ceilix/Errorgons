@@ -15,20 +15,25 @@ jinja_current_dir = jinja2.Environment(
     autoescape=True)
 
 def get_message():
-    message_list=['Line encoding error']
+    message_list=['Why not try to reframe your events positively today?',
+                  'How about focusing on what you did instead on what you achieved today :)',
+                   'Is there something you could be grateful for today? It could be the air, your health, family, all the things we often take for granted',
+                   'Why not take a moment to reflect? How would your 5 year old self see you right now? How about yourself when your 85? What about the you of now? Then ask why.',
+                   'After this, how about doing something you said you would try out "Someday". Do it today :)',
+                   'How about taking a moment to appreciate yourself today? All the simple and beautiful things about you, your smile , the energy you bring, your kindess. We are often the harshest critics of ourselves.']
+
+
     return(random.choice(message_list))
 
 def get_goals():
-    message_list=['Tomorrow, you will meet a life-changing new friend.',
-                  'Fame and Instagram followers are headed your way.',
-                  'On the Tuesday after next, an odd meeting will lead to a new opportunity.',
-                  'Despite dry skies, bring an umbrella tomorrow.',
-                  'A thrilling time is in your immediate future.',
-                  'Someone has Googled you recently.',
-                  'Stay alert. You will be part of a rescue mission.',
-                  'You will beat Watson in a game of Jeopardy. Start studying though']
+    message_list= ['Take away the complaint that "I have been harmed" and the harm is taken away with it',
+                    'Unless it affects the common good, why worry about others?',
+                    'Tommorow soons becomes today, years foward to years past. Be your own salvation while you can.',
+                    'How hot or cold is 30 degrees? Similarly, how good was your day today? :) ',
+                    'If you asked around, it would be hard to find many who can confidently say "I like myself!". Do you like yourself? If not, whats stopping you other than yourself?',
+                    'Unhappiness is often something we choose for ourselves. Today, why not make the concious choice to start trying to be happy instead!',
+                    'Be it in sucess or rejection there is progress. Only in indecision do we stagnate']
     return(random.choice(message_list))
-
 #global Happymessage = str(get_message())
 
 #global Goals = str(get_goals())
@@ -214,8 +219,11 @@ class HappyRetreive(webapp2.RequestHandler):
           start_template = jinja_current_dir.get_template("templates/Readthoughts.html")
           happy_query = HappyCloud.Happy.query()
           happy = happy_query.fetch()
+          Usernamer = users.get_current_user()
+
 
           template_vars = {
+                'Username' : Usernamer,
                 'happy' : happy,
           }
           self.response.write(start_template.render(template_vars))
@@ -309,6 +317,13 @@ class HappyLibraryRand(webapp2.RequestHandler):
         Result1 = result[Number(result)]
         Result2 = result[Number(result)]
         Result3 = result[Number(result)]
+        while str(Result1.input1) == "None":
+              Result1 = result[Number(result)]
+        while str(Result2.input1) == "None":
+              Result2 = result[Number(result)]
+        while str(Result2.input1) == "None":
+              Result3 = result[Number(result)]
+
 
 
 
@@ -344,6 +359,7 @@ app = webapp2.WSGIApplication([
      ('/Happy', HappyInput),
      ('/Happy2', HappyInputClone),
      ('/Happier',HappyRetreive),
+     ('/Ownlibrary', HappyLibrary),
      ('/library', HappyLibraryRand),
      ('/nouser', NoUserHandler)
 ], debug=True)
