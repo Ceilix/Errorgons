@@ -1,0 +1,30 @@
+.circle {
+  width: 350px;
+  height: 350px;
+  display: flex-end;
+  flex-wrap: wrap;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 50px;
+}
+.one {
+  background-color: white;
+  opacity: 0.6;
+}
+.two  {
+  background-color: white;
+  opacity: 0.6;
+}
+.three {
+  background-color: white;
+  opacity: 0.6;
+}
+.content {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+body {
+  background-image: url("http://176.32.230.250/divi-fullscreen.com/wp-content/uploads/2015/09/coast.jpg");
+  padding-top: 50px;
+}
