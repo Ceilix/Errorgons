@@ -80,7 +80,11 @@ class HappyInput(webapp2.RequestHandler):
       def post(self):
           #Placeholder location for survey classifcation input
           username = str(users.get_current_user())
+<<<<<<< HEAD
           Agegrp = self.request.get('Age-group')
+=======
+          Agegrp = self.request.get('Age-Group')
+>>>>>>> db8dcf4cf9ea0440fae49b908183e3875515b913
           Regiongrp = self.request.get('Region')
           print("Regiongrp", Regiongrp)
           Surveyresult = HappyCloud.Happy(
@@ -148,12 +152,20 @@ class HappyInputClone(webapp2.RequestHandler):
              Renamed = HappyCloud.Happy(
                     User = username,
                    # Identity = surveyresults
+<<<<<<< HEAD
                     input1 =  Happythought1,
+=======
+                    input1 = Happythought1,
+>>>>>>> db8dcf4cf9ea0440fae49b908183e3875515b913
                     UserAge = Userager,
                     UserRegion = Userregioner
               )
              usercurrent.Counter += 1
+<<<<<<< HEAD
              #usercurrent.Score += 1
+=======
+             usercurrent.Score += 1
+>>>>>>> db8dcf4cf9ea0440fae49b908183e3875515b913
              usercurrent.put()
              Renamed.put()
 
