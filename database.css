@@ -1,0 +1,33 @@
+body {
+  background-image: url("https://i.giphy.com/media/Ukv6cnPuD4mEE/source.gif");
+}
+.content {
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+  padding-top: 180px;
+}
+
+a:hover {
+  color: blue;
+}
+.circle {
+  width: 250px;
+  height: 250px;
+  display: flex-end;
+  flex-wrap: wrap;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 100px;
+}
+.one {
+  background-color: rgba(255,255,255,0.8);
+}
+.two  {
+  background-color: white;
+  opacity: 0.8;
+}
+html {
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 500;
+}
