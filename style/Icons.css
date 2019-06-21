@@ -4,9 +4,15 @@ html {
 
 }
 
+
+.centerstuff {
+  background-color: rgba(255,255,255,0.3);
+}
+
 .word {
   width: 500px;
   color: black;
+  font-size: 35px;
   font-weight: 100;
   border-bottom-style: solid;
   border-bottom-width: thin;
