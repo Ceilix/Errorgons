@@ -15,12 +15,11 @@ jinja_current_dir = jinja2.Environment(
     autoescape=True)
 
 def get_message():
-    message_list=['Why not try to reframe your events positively today?',
-                  '']
+    message_list=['Line encoding error']
     return(random.choice(message_list))
 
 def get_goals():
-    message_list=['Take away the complaint, “I have been harmed,” and the harm is taken away.',
+    message_list=['Tomorrow, you will meet a life-changing new friend.',
                   'Fame and Instagram followers are headed your way.',
                   'On the Tuesday after next, an odd meeting will lead to a new opportunity.',
                   'Despite dry skies, bring an umbrella tomorrow.',
@@ -70,7 +69,9 @@ class MainHandler(webapp2.RequestHandler):
 
 class MainPage(webapp2.RequestHandler):
       def get(self):
+         print("1")
          print(get_message())
+         print("2")
          print('Mainhandlerhello')
 
          start_template = jinja_current_dir.get_template("templates/Interface.html")
@@ -267,36 +268,67 @@ class HappyLibrary(webapp2.RequestHandler):
 
         self.response.write(results_template.render(template_vars))
 
-
-    def post(self):
+class HappyLibraryRand(webapp2.RequestHandler):
+    def get(self):
         results_template = jinja_current_dir.get_template('templates/library.html')
 
         Userperm = Happy.query(Happy.User == str(users.get_current_user())).fetch()
-        print(Hello)
-        def Number():
-            noomber = random.randint(0,len(Userperm)-1)
+        print('Hello')
+        def Number(mylist):
+            noomber = random.randint(0,len(mylist)-1)
             return noomber
 
 
         Happythought1 = self.request.get('Happy_thought1')
         unlockbutton = ""
-        Usernewer = Userperm[Number()]
-        new22 = str(Usernewer.input1)
-        checker = Usernewer
+        Usernewer = Userperm[Number(Userperm)]
+                 #Placeholder location for survey classifcation input
+        username = str(users.get_current_user())
+        Agegrp = self.request.get('Age-Group')
+        Regiongrp = self.request.get('Region')
+        Surveyresult = HappyCloud.Happy(
+                User = username,
+                UserAge = Agegrp,
+                UserRegion = Regiongrp
+                       )
+        print(Agegrp)
+        print(Regiongrp)
+        Userany = Happy.query().filter(Happy.User!=username).fetch()
+        print(Userperm)
+        current_user = Happy.query().filter(Happy.User==username).fetch()[0]
+        print(current_user.UserAge)
+        print(current_user.UserRegion)
+        result = []
 
-        #Ensure input is not = ""
-        #OR if input is "" refresh new22  until input retrieved not ""
+        for user in Userany:
+            if user.UserAge == current_user.UserAge and user.UserRegion == current_user.UserRegion:
+                result.append(user)
 
+
+        print(result)
+        Result1 = result[Number(result)]
+        Result2 = result[Number(result)]
+        Result3 = result[Number(result)]
+
+
+
+        # while Usernewer1.Agegrp != Randomuserlist.Agegrp:
+        #     done = False
+
+        # for x in Userperm:
+        #     if Agegrp == x.UserAge and Regiongrp == x.UserRegion:
+        #       print(x.input1)
 
 
 
         template_vars = {
-               'happy' : new22,
-               'check' : checker
+               'happy1' : Result1.input1,
+               'happy2' : Result2.input1,
+               'happy3' : Result3.input1
+
                }
 
         self.response.write(results_template.render(template_vars))
-
 
 
 
@@ -312,6 +344,6 @@ app = webapp2.WSGIApplication([
      ('/Happy', HappyInput),
      ('/Happy2', HappyInputClone),
      ('/Happier',HappyRetreive),
-     ('/library', HappyLibrary),
+     ('/library', HappyLibraryRand),
      ('/nouser', NoUserHandler)
 ], debug=True)
