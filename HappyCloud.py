@@ -9,5 +9,4 @@ class Happy(ndb.Model):
 
 class Usertemp(ndb.Model):
     Userkey = ndb.StringProperty(required=True)
-    Userlogincount = ndb.IntegerProperty(required = True)
     Counter = ndb.IntegerProperty(required = False)

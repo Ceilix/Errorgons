@@ -15,11 +15,12 @@ jinja_current_dir = jinja2.Environment(
     autoescape=True)
 
 def get_message():
-    message_list=['Line encoding error']
+    message_list=['Why not try to reframe your events positively today?',
+                  '']
     return(random.choice(message_list))
 
 def get_goals():
-    message_list=['Tomorrow, you will meet a life-changing new friend.',
+    message_list=['Take away the complaint, “I have been harmed,” and the harm is taken away.',
                   'Fame and Instagram followers are headed your way.',
                   'On the Tuesday after next, an odd meeting will lead to a new opportunity.',
                   'Despite dry skies, bring an umbrella tomorrow.',
@@ -45,7 +46,7 @@ class MainHandler(webapp2.RequestHandler):
            Userinit = Usertemp(
                  Userkey = str(users.get_current_user()),
                  Counter = 0,
-                 Userlogincount = 0
+
 
                  # Surveycomplete = 0
  #How to prevent this from resetting all the time?
@@ -163,7 +164,7 @@ class HappyInputClone(webapp2.RequestHandler):
                     UserRegion = Userregioner
               )
              usercurrent.Counter += 1
-             usercurrent.Userlogincount += 1
+            
              usercurrent.put()
              Renamed.put()
 
